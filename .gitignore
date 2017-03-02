@@ -1,0 +1,11 @@
+.idea
+composer.lock
+*.log
+thinkphp
+runtime
+vender
+.travis.yml
+build.php
+composer.json
+LICENSE.txt
+think
