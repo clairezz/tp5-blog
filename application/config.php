@@ -139,7 +139,7 @@ return [
         // 开启布局
         'layout_on'     =>  true,
         // 布局入口文件名称
-        'layout_name'   =>  '../../common/view/layout/main',
+        'layout_name'   =>  'layout/main',
         // 输出替换变量
         'layout_item'   =>  '{__CONTENT__}',
     ],
