@@ -2,6 +2,7 @@
 
 namespace app\admin\controller;
 
+use app\admin\model\Article;
 use app\admin\model\Node;
 use app\admin\model\Role;
 use app\admin\model\User;
@@ -24,10 +25,25 @@ class Index extends \think\Controller {
     }
 
     public function signup() {
-        return $this->fetch('signup');
+        return $this->fetch('signup', ["username" => ""]);
     }
 
     public function login() {
-        return $this->fetch('login');
+        return $this->fetch('login', ["username" => ""]);
+    }
+
+    public function logout() {
+        return $this->fetch('index@index/index',["username" => ""]);
+    }
+
+    public function handleSignup($username, $phone, $passwd) {
+
+        return $this->redirect("index/main_page/index", ["username" => $username]);
+    }
+
+    public function handleLogin($user, $passwd) {
+        // 用户验证（用户名或手机号）
+        $username = $user;
+        return $this->redirect("index/main_page/index", ["username" => $username]);
     }
 }

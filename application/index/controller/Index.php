@@ -6,9 +6,9 @@ use think\Controller;
 
 class Index extends Controller
 {
-    public function index()
+    public function index($username="")
     {
-        return $this->fetch('index');
+        return $this->fetch('index', ["username" => $username]);
     }
 
     public function about()
