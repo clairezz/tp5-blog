@@ -13,9 +13,9 @@ return [
     // 数据库类型
     'type'            => 'mysql',
     // 服务器地址
-    'hostname'        => '192.168.137.100',
+    'hostname'        => '192.168.107.100',
     // 数据库名
-    'database'        => 'untouchable_blog',
+    'database'        => 'tp5_blog',
     // 用户名
     'username'        => 'root',
     // 密码

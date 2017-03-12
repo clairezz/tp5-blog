@@ -1,10 +1,10 @@
-
-
-<div style="margin: 100px;margin-left: auto">
-    {$user}<br>
-    {$role1}<br>
-    {$role2}<br>
-    {$node}<br>
-    {$dummy}<br>
+<div style="width:100%; border-color:gainsboro; border: solid; word-wrap: break-word; word-break: normal; padding:20px; margin: 100px;margin-left: auto">
+    {$user}<br><br>
+    <ul>
+        <li><b>id: {$user.id}</b> </li>
+        <li><b>name: {$user.name}</b></li>
+        <li><b>password: {$user.password}</b></li>
+        <li><b>phone number: {$user.phone_number}</b></li>
+        <li><b>register time: {$user.register_time|date="y-m-d H:i:s",###}</b></li>
+    </ul>
 </div>
-
