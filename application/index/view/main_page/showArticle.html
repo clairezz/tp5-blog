@@ -1,6 +1,37 @@
-<div class="jumbotron">
-    <h1>Hello, world!</h1>
-    <p style="width: 10px; height: 100px; margin: 100px; font-size: large; color:darkslategrey;">
-        {$art}
+<head>
+    <title>
+        Blog-{$art['title']}
+    </title>
+</head>
+<div style="height:60px; padding: 0px; border:solid; border-color: lightgrey; background-color:ghostwhite; text-align: center; margin-top: 30%">
+    <h3><b>{$art['title']}</b></h3>
+</div>
+<div style="border:solid; border-color: lightgrey; background-color:ghostwhite;padding: 20px; martin-top:-20px">
+    <p>
+        {$art['content']}
     </p>
 </div>
+<div>
+    <br>
+    <button onclick="location.href='/index/editor/index?id={$art.id}'">编辑</button>
+    <button id="del">删除</button>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#del').click(function () {
+            if(confirm("您确定要删除这篇文章吗？")){
+                $.getJSON('/index/editor/delete?id={$art.id}',null, function (data, textStatus, jqXHR) {
+                    var res = $.parseJSON(data);
+                    if(res.status == 0) {
+                        alert("文章已被成功删除");
+                        location.href='/index/main_page/index?username={$username}'; // 页面跳转
+                    } else {
+                        alert("无法删除文章");
+                    }
+
+                })
+            }
+        })
+    })
+</script>

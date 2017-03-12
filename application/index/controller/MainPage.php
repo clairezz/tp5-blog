@@ -11,17 +11,18 @@ class MainPage extends \think\Controller {
     }
 
     function index($username="") {
-         $bob = array("title" => "Bob", "link" => "/index/main_page/show?id=1&username=" . $username);
-         $rose = array("title" => "Rose", "link" => "/index/main_page/show?id=2&username=" . $username);
-         $jack = array("title" => "Jack", "link" => "/index/main_page/show?id=3&username=" . $username);
-         $list = array($bob, $jack, $rose);
+        $arts = Article::all();
+        foreach ($arts as $art){
+            $art['link'] = '/index/main_page/show?id=' . $art['id'] . 'username=' . $username;
+            $list[] = $art;
+        }
         $this->assign('list',$list);
         $this->assign('username', $username);
         return $this->fetch("index");
     }
 
     function show($id, $username="") {
-        $art = Article::get($id)['content'];
+        $art = Article::get($id);
         return $this->fetch("showArticle", ['art' => $art, 'username' => $username]);
     }
 }

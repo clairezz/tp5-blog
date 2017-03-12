@@ -9,3 +9,5 @@ build.php
 composer.json
 LICENSE.txt
 think
+application/database.php
+application/config.php

@@ -1,0 +1,26 @@
+<head>
+    <title>Blog-文章编辑</title>
+</head>
+
+<div style="margin-top: 35%">
+    <!--修改文章时带参数id，数据库做更新操作；新增文章时不带参数id，数据库做插入操作-->
+    <form id="frmDemo" method="post" action="save{$args.id ? '?id=' . $args.id : ''}">
+        <input type="text" name="title" style="width:780px;height:24px;padding:10px;" placeholder="题目" {$args.title ? 'value=' . $args.title : ''}  />
+        <textarea name="content" style="width:780px;height:180px;" class="xheditor">
+            {$args.content ?? '请在此编辑您喜欢的内容……'}
+        </textarea>
+        <br/><br/>
+        <input id = "sbm" type="submit" name="save" value="提交" />
+        <input type="reset" name="reset" value="重置" />
+    </form><br />
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#frmDemo").submit(function (e) {
+            if(!confirm("您确认要提交吗？")) {
+                e.preventDefault();
+            }
+        })
+    })
+</script>
