@@ -1,6 +1,7 @@
 <?php
 namespace app\index\controller;
 
+use app\admin\model\User;
 use think\Request;
 use app\index\model\Article;
 use \think\Session;
@@ -11,19 +12,26 @@ class MainPage extends \think\Controller {
         parent::__construct($request);
     }
 
-    function index($username="") {
-        $arts = Article::all();
+    function index() {
+        if(! Session::has('username')) {
+            $this->error('请先登录', '/admin/index/login');
+        }
+        /* 查询该用户的文章列表 */
+        $user = User::get(['name' => Session::get('username')]);
+        $arts = Article::all(['author_id' => $user['id']]);
+
+        $list = [];
         foreach ($arts as $art){
-            $art['link'] = '/index/main_page/show?id=' . $art['id'] . '&username=' . $username;
+            $art['link'] = '/index/main_page/show?id=' . $art['id']; // 生成文章详情链接
             $list[] = $art;
         }
         $this->assign('list',$list);
-        $this->assign('username', Session::get('username'));
+
         return $this->fetch("index");
     }
 
-    function show($id, $username="") {
+    function show($id) {
         $art = Article::get($id);
-        return $this->fetch("showArticle", ['art' => $art, 'username' => $username]);
+        return $this->fetch("showArticle", ['art' => $art]);
     }
 }

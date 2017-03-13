@@ -2,7 +2,9 @@
 namespace app\index\controller;
 
 use app\index\model\Article;
+use app\admin\model\User;
 use think\Request;
+use think\Session;
 
 class Editor extends \think\Controller {
     function _initialize()
@@ -15,37 +17,38 @@ class Editor extends \think\Controller {
         parent::__construct($request);
     }
 
-    function index($id=-1, $username="") {
-        $args['username'] = $username;
+    function index($id=-1) {
+        $args = [];
         if($id > 0) {
             $result = Article::get($id);
             if($result){
-              //  array_merge($args, (array)$result);
                 $args['id'] = $result['id'];
                 $args['title'] = $result['title'];
                 $args['content'] = $result['content'];
             }
         }
 
-        return $this->fetch('index', ['username' => $username, 'args' => $args]);
+        return $this->fetch('index', ['args' => $args]);
     }
 
-    function save($id=-1, $username="") {
+    function save($id=-1) {
         $content = $this->request->param('content');
         $title = $this->request->param('title');
 
+        // 根据session里的用户名查询用户id
+        $user = User::get(['name' => Session::get('username')]);
+
         $art = new Article();
-        // for debug author_id = 1r
         if($id != -1) {
-            $art->save(['content'=>$content, 'title' => $title, 'author_id' => 1], ['id' => $id]); // 更新
+            $art->save(['content'=>$content, 'title' => $title, 'author_id' => $user['id']], ['id' => $id]); // 更新
         } else {
-            $art->save(['content'=>$content, 'title' => $title, 'author_id' => 1]); // 新增
+            $art->save(['content'=>$content, 'title' => $title, 'author_id' => $user['id']]); // 新增
         }
 
-        $this->redirect('/index/main_page/index', ['username' => $username]);
+        $this->redirect('/index/main_page/index');
     }
 
-    function delete($id, $username="") {
+    function delete($id) {
         $art = Article::destroy($id);
         $res_json = json_encode(['status' => 0]);
         return $res_json;

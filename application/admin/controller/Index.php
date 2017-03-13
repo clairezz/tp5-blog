@@ -43,7 +43,7 @@ class Index extends \think\Controller {
     }
 
     public function logout() {
-        Session::delete('username');
+        Session::delete('username'); // session中的用户状态置为登出
         return $this->fetch('index@index/index');
     }
 
