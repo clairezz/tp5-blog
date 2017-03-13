@@ -35,10 +35,11 @@ class Editor extends \think\Controller {
         $title = $this->request->param('title');
 
         $art = new Article();
+        // for debug author_id = 1r
         if($id != -1) {
-            $art->save(['content'=>$content, 'title' => $title], ['id' => $id]); // 更新
+            $art->save(['content'=>$content, 'title' => $title, 'author_id' => 1], ['id' => $id]); // 更新
         } else {
-            $art->save(['content'=>$content, 'title' => $title]); // 新增
+            $art->save(['content'=>$content, 'title' => $title, 'author_id' => 1]); // 新增
         }
 
         $this->redirect('/index/main_page/index', ['username' => $username]);

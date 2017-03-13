@@ -31,17 +31,16 @@
                 <!--</li>-->
             </ul>
 
-            <?php if($username == ""): ?>
+             <?php if (! \think\Session::has('username')): ?>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="/admin/index/login">登录</a></li>
                     <li><a href="/admin/index/signup">注册</a></li>
                 </ul>
             <?php else: ?>
             <ul class="nav navbar-nav navbar-right">
-               <li> <a style="color: #2aabd2;">你好, {$username}</a></li>
+               <li> <a style="color: #2aabd2;">你好, {$Think.session.username}</a></li>
                 <li><a href="/admin/index/logout">退出</a></li>
-            </ul>
-           <?php endif; ?>
+            <?php endif ?>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
