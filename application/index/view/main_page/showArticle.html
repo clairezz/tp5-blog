@@ -25,7 +25,7 @@
                     var res = $.parseJSON(data);
                     if(res.status == 0) {
                         alert("文章已被成功删除");
-                        location.href='/index/main_page/index?username={$username}'; // 页面跳转
+                        location.href='/index/main_page/index'; // 页面跳转
                     } else {
                         alert("无法删除文章");
                     }

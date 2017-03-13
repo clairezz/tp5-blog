@@ -7,7 +7,7 @@
         <a href="#" class="list-group-item active">
             文章列表
         </a>
-        {volist name="list" id="item"}
+        {volist name="list" id="item" empty='点击 <b>添加</b> 按钮， 开始写您的第一篇博客吧:)'}
         <a href="{$item.link}" class="list-group-item">{$item.title}</a>
         {/volist}
     </div>
