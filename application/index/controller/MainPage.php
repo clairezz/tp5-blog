@@ -21,7 +21,6 @@ class MainPage extends \think\Controller {
         $user = User::get(['name' => Session::get('username')]);
         $arts = Article::all(['author_id' => $user['id']]);
         Log::record('username: ' . $user, 'debug');
-
         $list = [];
         foreach ($arts as $art){
             $art['link'] = '/index/main_page/show?id=' . $art['id']; // 生成文章详情链接
